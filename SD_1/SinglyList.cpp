@@ -11,7 +11,6 @@ SinglyList::SinglyList() {
 }
 
 // destruktor - przechodzimy przez liste i kasujemy kazdy wezel
-// bez tego bylby wyciek pamieci
 SinglyList::~SinglyList() {
     Wezel* Aktualny = Glowa;
     while (Aktualny) {
@@ -21,7 +20,7 @@ SinglyList::~SinglyList() {
     }
 }
 
-// dodaj na koniec - O(1) dzieki wskaznikowi Ogon
+// dodaj na koniec, zoptymalizowane dzieki wskaznikowi Ogon
 void SinglyList::DodajNaKoniec(int Wartosc) {
     Wezel* NowyWezel = new Wezel{ Wartosc, nullptr }; // next = nullptr bo bedzie ostatni
 
@@ -35,7 +34,7 @@ void SinglyList::DodajNaKoniec(int Wartosc) {
     }
 }
 
-// dodaj na poczatek - O(1)
+// dodaj na poczatek 
 void SinglyList::DodajNaPoczatek(int Wartosc) {
     Wezel* NowyWezel = new Wezel{ Wartosc, Glowa }; // nastepny nowego = dotychczasowy pierwszy
 
@@ -43,15 +42,15 @@ void SinglyList::DodajNaPoczatek(int Wartosc) {
     if (!Ogon) Ogon = NowyWezel;          // jesli lista byla pusta, Ogon tez wskazuje na nowy
 }
 
-// dodaj na pozycje - O(n) bo musimy dojsc do odpowiedniego miejsca
+// dodaj na pozycje 
 void SinglyList::DodajNaPozycje(int Wartosc, int Pozycja) {
     if (Pozycja <= 0) {
-        DodajNaPoczatek(Wartosc);
+        DodajNaPoczatek(Wartosc); //jesli pusta to dodajemy na poczatek
         return;
     }
 
     int DlugoscListy = PobierzRozmiar();
-    if (Pozycja >= DlugoscListy) {
+    if (Pozycja >= DlugoscListy) { //jesli wieksza od dlugosci listy dodajemy na koniec
         DodajNaKoniec(Wartosc);
         return;
     }
@@ -61,7 +60,7 @@ void SinglyList::DodajNaPozycje(int Wartosc, int Pozycja) {
     for (int i = 0; i < Pozycja - 1; i++)
         Aktualny = Aktualny->Nastepny;
 
-    // wstawiamy nowy wezel miedzy Aktualny a Aktualny->Nastepny
+    // wstawiamy nowy wezel miedzy Aktualny a Aktualny - Nastepny
     Wezel* NowyWezel = new Wezel{ Wartosc, Aktualny->Nastepny };
     Aktualny->Nastepny = NowyWezel;
 
@@ -69,7 +68,7 @@ void SinglyList::DodajNaPozycje(int Wartosc, int Pozycja) {
     if (!NowyWezel->Nastepny) Ogon = NowyWezel;
 }
 
-// usun pierwszy - O(1)
+// usun pierwszy
 void SinglyList::UsunZPoczatku() {
     if (!Glowa) return; // pusta lista - nic nie rob
 
@@ -81,7 +80,7 @@ void SinglyList::UsunZPoczatku() {
     delete Tymczasowy;
 }
 
-// usun ostatni - O(n) bo nie mamy wskaznika na przedostatni
+// usun ostatni
 void SinglyList::UsunZKonca() {
     if (!Glowa) return;
 
@@ -92,7 +91,7 @@ void SinglyList::UsunZKonca() {
         return;
     }
 
-    // musimy dojsc do wezla PRZED ostatnim
+    // musimy dojsc do wezla przed ostatnim
     Wezel* Aktualny = Glowa;
     while (Aktualny->Nastepny != Ogon)
         Aktualny = Aktualny->Nastepny;
@@ -102,12 +101,12 @@ void SinglyList::UsunZKonca() {
     Ogon->Nastepny = nullptr; // upewniamy sie ze next = nullptr
 }
 
-// usun z pozycji - O(n)
+// usun z pozycji
 void SinglyList::UsunZPozycji(int Pozycja) {
     if (!Glowa) return;
 
     if (Pozycja <= 0) {
-        UsunZPoczatku();
+        UsunZPoczatku();  //jesli pozycja <0 to usun pierwszy element
         return;
     }
 
@@ -127,7 +126,7 @@ void SinglyList::UsunZPozycji(int Pozycja) {
     delete DoUsuniecia;
 }
 
-// szukaj - O(n) przeszukiwanie od poczatku do konca
+// szukaj - przeszukiwanie od poczatku do konca
 int SinglyList::Szukaj(int Wartosc) {
     Wezel* Aktualny = Glowa;
     int Indeks = 0;
@@ -163,7 +162,7 @@ void SinglyList::Generuj(int IloscDoWygenerowania) {
         DodajNaKoniec(rand() % 10000);
 }
 
-// pobierz rozmiar - O(n) bo musimy przejsc cala liste i policzyc wezly
+// pobierz rozmiar - przechodzimy przez cala liste i zliczamy elementy
 int SinglyList::PobierzRozmiar() {
     int Licznik = 0;
     Wezel* Aktualny = Glowa;

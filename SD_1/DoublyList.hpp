@@ -9,7 +9,7 @@ struct WezelD {
 };
 
 // lista dwukierunkowa - kazdy wezel wskazuje na nastepny I poprzedni
-// dzieki wskaznikowi Poprzedni usuwanie z konca jest O(1)
+// dzieki wskaznikowi Poprzedni usuwanie z konca jest zoptymalizowane
 class DoublyList {
     WezelD* Glowa; // wskaznik na pierwszy wezel
     WezelD* Ogon;  // wskaznik na ostatni wezel

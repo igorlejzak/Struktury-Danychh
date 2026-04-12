@@ -205,7 +205,6 @@ void UruchomBenchmark() {
     cout << "Benchmark zakończony! Pomiary zapisane w 'wyniki.csv'\n";
 }
 
-// MAIN - dwupoziomowe menu
 int main() {
     srand(time(NULL)); // inicjalizacja generatora 
 

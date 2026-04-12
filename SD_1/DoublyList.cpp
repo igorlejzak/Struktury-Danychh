@@ -10,7 +10,7 @@ DoublyList::DoublyList() {
     Ogon = nullptr;
 }
 
-// destruktor - kasujemy kazdy wezel zeby nie bylo wycieku pamieci
+// destruktor - kasujemy kazdy wezel
 DoublyList::~DoublyList() {
     WezelD* Aktualny = Glowa;
     while (Aktualny) {
@@ -20,12 +20,11 @@ DoublyList::~DoublyList() {
     }
 }
 
-// dodaj na koniec - O(1) dzieki wskaznikowi Ogon
+// dodaj na koniec
 void DoublyList::DodajNaKoniec(int Wartosc) {
     WezelD* NowyWezel = new WezelD{ Wartosc, nullptr, Ogon }; // nastepny=nullptr, bo to nasz nowy ogon, poprzedni=stary ogon
 
     if (!Glowa) {
-        // lista pusta
         Glowa = Ogon = NowyWezel;
     }
     else {
@@ -34,7 +33,7 @@ void DoublyList::DodajNaKoniec(int Wartosc) {
     }
 }
 
-// dodaj na poczatek - O(1)
+// dodaj na poczatek
 void DoublyList::DodajNaPoczatek(int Wartosc) {
     WezelD* NowyWezel = new WezelD{ Wartosc, Glowa, nullptr }; // nastepny=stary Glowa, poprzedni=nullptr, bo to nowa glowa
 
@@ -44,7 +43,7 @@ void DoublyList::DodajNaPoczatek(int Wartosc) {
     if (!Ogon) Ogon = NowyWezel; // lista byla pusta
 }
 
-// dodaj na pozycje - O(n)
+// dodaj na pozycje
 void DoublyList::DodajNaPozycje(int Wartosc, int Pozycja) {
     if (Pozycja <= 0) {
         DodajNaPoczatek(Wartosc);
@@ -71,7 +70,7 @@ void DoublyList::DodajNaPozycje(int Wartosc, int Pozycja) {
     if (NowyWezel->Poprzedni == nullptr) Glowa = NowyWezel; // wstawiono na poczatek
 }
 
-// usun pierwszy - O(1)
+// usun pierwszy
 void DoublyList::UsunZPoczatku() {
     if (!Glowa) return;
 
@@ -84,7 +83,7 @@ void DoublyList::UsunZPoczatku() {
     delete Tymczasowy;
 }
 
-// usun ostatni - O(1) dzieki wskaznikowi Poprzedni
+// usun ostatni
 void DoublyList::UsunZKonca() {
     if (!Ogon) return;
 
@@ -97,7 +96,7 @@ void DoublyList::UsunZKonca() {
     delete Tymczasowy;
 }
 
-// usun z pozycji - O(n)
+// usun z pozycji
 void DoublyList::UsunZPozycji(int Pozycja) {
     if (!Glowa) return;
 
@@ -124,7 +123,7 @@ void DoublyList::UsunZPozycji(int Pozycja) {
     delete Aktualny;
 }
 
-// szukaj - O(n)
+// szukaj - przechodzimy przez cala strukture
 int DoublyList::Szukaj(int Wartosc) {
     WezelD* Aktualny = Glowa;
     int Indeks = 0;
@@ -160,7 +159,7 @@ void DoublyList::Generuj(int IloscDoWygenerowania) {
         DodajNaKoniec(rand() % 10000);
 }
 
-// pobierz rozmiar - O(n)
+// pobierz rozmiar
 int DoublyList::PobierzRozmiar() {
     int Licznik = 0;
     WezelD* Aktualny = Glowa;

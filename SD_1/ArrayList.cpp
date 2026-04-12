@@ -7,7 +7,7 @@ using namespace std;
 
 ArrayList::ArrayList() {
     MaksymalnyRozmiar = 10;              // na poczatek tworzymy tablice o rozmiarze 10 elementów
-    IloscElementow = 0;                  // tablica pusta przy tworzeniu
+    IloscElementow = 0;                  
     Tablica = new int[MaksymalnyRozmiar]; // rezerwujemy pamiec
 }
 
@@ -18,7 +18,6 @@ ArrayList::~ArrayList() {
 
 // Metoda powieksz zwieksza nasza tablice dwukrotnie przy braku miejsca
 // kopiuje stare elementy do nowej wiekszej tablicy
-// zlozonosc: O(n) - trzeba przekopiowac wszystkie elementy
 void ArrayList::Powieksz() {
     MaksymalnyRozmiar *= 2;                  
     int* NowaTablica = new int[MaksymalnyRozmiar]; 
@@ -31,14 +30,14 @@ void ArrayList::Powieksz() {
     Tablica = NowaTablica; // podmieniamy wskaznik
 }
 
-// dodaj na koniec - O(1) bo wstawiamy od razu na ostatnie wolne miejsce
+// dodaj na koniec - wstawiamy od razu na ostatnie wolne miejsce
 void ArrayList::DodajNaKoniec(int Wartosc) {
     if (IloscElementow == MaksymalnyRozmiar) Powieksz(); 
     Tablica[IloscElementow] = Wartosc;
     IloscElementow++;
 }
 
-// dodaj na poczatek - O(n) bo musimy przesunac wszystkie elementy w prawo
+// dodaj na poczatek - musimy przesunac wszystkie elementy w prawo
 void ArrayList::DodajNaPoczatek(int Wartosc) {
     if (IloscElementow == MaksymalnyRozmiar) Powieksz();
 
@@ -50,7 +49,7 @@ void ArrayList::DodajNaPoczatek(int Wartosc) {
     IloscElementow++;
 }
 
-// dodaj na pozycje - O(n) bo przesuwamy czesc elementow w prawo
+// dodaj na pozycje - przesuwamy czesc elementow w prawo
 void ArrayList::DodajNaPozycje(int Wartosc, int Pozycja) {
     if (IloscElementow == MaksymalnyRozmiar) Powieksz();
 
@@ -66,12 +65,12 @@ void ArrayList::DodajNaPozycje(int Wartosc, int Pozycja) {
     IloscElementow++;
 }
 
-// usun z konca - O(1), wystarczy zmniejszyc licznik
+// usun z konca, zmniejszamy licznik
 void ArrayList::UsunZKonca() {
     if (IloscElementow > 0) IloscElementow--;
 }
 
-// usun z poczatku - O(n) bo musimy przesunac wszystkie elementy w lewo
+// usun z poczatku - przesuwamy wszystkie elementy w lewo
 void ArrayList::UsunZPoczatku() {
     if (IloscElementow == 0) return;
 
@@ -81,7 +80,7 @@ void ArrayList::UsunZPoczatku() {
     IloscElementow--;
 }
 
-// usun z pozycji - O(n) bo przesuwamy czesc elementow w lewo
+// usun z pozycji - przesuwamy czesc elementow w lewo
 void ArrayList::UsunZPozycji(int Pozycja) {
     if (IloscElementow == 0) return;
 
@@ -96,7 +95,7 @@ void ArrayList::UsunZPozycji(int Pozycja) {
     IloscElementow--;
 }
 
-// szukaj - O(n) przeszukiwanie liniowe od poczatku do konca
+// szukaj - przeszukiwanie liniowe od poczatku do konca
 // zwraca indeks pierwszego wystapienia lub -1 jesli nie znaleziono
 int ArrayList::Szukaj(int Wartosc) {
     for (int i = 0; i < IloscElementow; i++)

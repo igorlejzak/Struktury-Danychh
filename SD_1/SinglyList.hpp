@@ -9,7 +9,7 @@ struct Wezel {
 
 // lista jednokierunkowa - kazdy wezel wskazuje tylko do przodu.
 // trzymamy wskaznik na pierwszy (Glowa) i ostatni (Ogon) wezel.
-// ogon potrzebny zeby dodawanie na koniec bylo O(1) a nie O(n)
+// W naszym przypadku wykorzystujemy ogon, aby zoptymalizowac dodawanie na koniec
 class SinglyList {
     Wezel* Glowa; // wskaznik na pierwszy wezel
     Wezel* Ogon;  // wskaznik na ostatni wezel
